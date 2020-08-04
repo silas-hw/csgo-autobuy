@@ -1,0 +1,1 @@
+<a href="csgo-autobuy.exe" download>DOWNLOAD</a>

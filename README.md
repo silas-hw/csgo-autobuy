@@ -1,1 +1,1 @@
-<a href="csgo-autobuy.exe" download>DOWNLOAD</a>
+# [DOWNLOAD](https://github.com/silas-hw/csgo-autobuy/raw/master/csgo-autobuy.exe)  

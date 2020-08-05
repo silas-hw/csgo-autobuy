@@ -1,6 +1,6 @@
 import tkinter as tk
 import tkinter.scrolledtext as tkst
-from tkinter import ttk
+import tkinter.ttk as ttk
 from tkinter.constants import ANCHOR, CENTER
 import keyboard
 import pyperclip
@@ -9,14 +9,18 @@ from CLI import Bind
 #theming
 
 bg_color = "#303030" #background color
-hl_color = "#525252" #highlight color
+hl_color = "#969696" #highlight color
+text_color = "white"
+btn_color = "#7d7d7d"
+active_btn_fg = "#87eb05"
 
 window = tk.Tk()
 window.wm_geometry("400x220")
 window.title("csgo-autobuy")
-frame = tk.Frame(window, width=450, height=450)
+window.config(bg=bg_color)
+frame = tk.Frame(window, width=450, height=450, bg=bg_color)
 
-frame1 = tk.Frame(frame, width=40)
+frame1 = tk.Frame(frame, width=40, bg=bg_color)
 
 def entry_key():
     hotkey_display.config(state='normal')
@@ -26,10 +30,10 @@ def entry_key():
     hotkey_display.insert(0, key)
     hotkey_display.config(state='readonly')
 
-hotkey_record = tk.Button(frame1, text="record", width=8, command=entry_key)
+hotkey_record = tk.Button(frame1, text="record", width=8, command=entry_key, bg=btn_color, fg=text_color, activebackground=btn_color, activeforeground="white")
 hotkey_record.grid(row=1, column=0)
 
-hotkey_display = tk.Entry(frame1, width=40)
+hotkey_display = tk.Entry(frame1, width=40, readonlybackground=hl_color)
 hotkey_display.insert(1, "Hotkey")
 hotkey_display.config(state='readonly')
 hotkey_display.grid(row=1, column=1)
@@ -42,19 +46,19 @@ def kb_generate():
     kb_display.insert(0, keybind.command)
     kb_display.config(state="readonly")
 
-kb_display = tk.Entry(frame1, width=40)
+kb_display = tk.Entry(frame1, width=40, readonlybackground=hl_color)
 kb_display.grid(row=0, column=1)
 kb_display.insert(1, "Command output")
 kb_display.config(state='readonly')
-kb_btn = tk.Button(frame1, text="Generate", width=8, command=kb_generate).grid(row=0, column=0)
+kb_btn = tk.Button(frame1, text="Generate", width=8, bg=btn_color, fg=text_color, activebackground=btn_color, activeforeground="white", command=kb_generate).grid(row=0, column=0)
 
 def kb_copy():
     pyperclip.copy(keybind.command)
 
-kb_copy = tk.Button(frame1, text="C", width=3, command=kb_copy)
+kb_copy = tk.Button(frame1, text="C", width=3, bg=btn_color, fg=text_color, activebackground=btn_color, activeforeground="white", command=kb_copy)
 kb_copy.grid(row=0, column=2)
 
-weapons_frame = tk.Frame(frame, width=400, height=200)
+weapons_frame = tk.Frame(frame, width=400, height=200, bg=bg_color)
 
 weapons = {
     "M4A4":"m4a1",
@@ -111,49 +115,49 @@ def clear_weapons():
     keybind.weapons = []
     weapon_list.delete(1.0, 'end')
 
-weapon_select = tk.Frame(weapons_frame, width=200, height=200)
+weapon_select = tk.Frame(weapons_frame, width=200, height=200, bg=bg_color)
 
-ar_label = tk.Label(weapon_select, text="Rifle")
+ar_label = tk.Label(weapon_select, text="Rifle", bg=bg_color, fg=text_color)
 ar_options = ttk.Combobox(weapon_select, values=["", "Famas", "M4A4", "M4A1-S", "Aug", "Galil", "Ak47", "SG-556", "Awp", "Gs3sg1", "Scar 20", "SSG"])
-ar_add = tk.Button(weapon_select, text="+", command=lambda: add_weapon(ar_options))
+ar_add = tk.Button(weapon_select, text="+", bg=btn_color, fg=text_color, activebackground=btn_color, activeforeground=active_btn_fg, command=lambda: add_weapon(ar_options))
 ar_label.grid(row=0, column=0)
 ar_options.grid(row=0, column=1)
 ar_options.config(state='readonly')
 ar_add.grid(row=0, column=2)
 
-smg_label = tk.Label(weapon_select, text="SMG")
+smg_label = tk.Label(weapon_select, text="SMG", bg=bg_color, fg=text_color)
 smg_options = ttk.Combobox(weapon_select, values=["", "PP-Bizon", "Mac-10", "MP7", "MP9", "MP5-sd", "UMP-45"])
-smg_add = tk.Button(weapon_select, text="+", command=lambda: add_weapon(smg_options))
+smg_add = tk.Button(weapon_select, text="+", bg=btn_color, fg=text_color, activebackground=btn_color, activeforeground=active_btn_fg, command=lambda: add_weapon(smg_options))
 smg_label.grid(row=1, column=0)
 smg_options.grid(row=1, column=1)
 smg_options.config(state='readonly')
 smg_add.grid(row=1, column=2)
 
-heavy_label = tk.Label(weapon_select, text="Heavy")
+heavy_label = tk.Label(weapon_select, text="Heavy", bg=bg_color, fg=text_color)
 heavy_options = ttk.Combobox(weapon_select, values=["", "M249", "Negev", "Mag7", "Sawed-off", "Nova", "XM1014"])
-heavy_add = tk.Button(weapon_select, text="+", command=lambda: add_weapon(heavy_options))
+heavy_add = tk.Button(weapon_select, text="+", bg=btn_color, fg=text_color, activebackground=btn_color, activeforeground=active_btn_fg, command=lambda: add_weapon(heavy_options))
 heavy_label.grid(row=2, column=0)
 heavy_options.grid(row=2, column=1)
 heavy_options.config(state='readonly')
 heavy_add.grid(row=2, column=2)
 
-pistol_label = tk.Label(weapon_select, text="Pistol")
+pistol_label = tk.Label(weapon_select, text="Pistol", bg=bg_color, fg=text_color)
 pistol_options = ttk.Combobox(weapon_select, values=["", "USP",  "P2000", "Glock", "P250", "Dual Barettas", "Fiveseven", "Tec-9", "cz75-Auto", "R8 revolver", "Desert eagle"])
-pistol_add = tk.Button(weapon_select, text="+", command=lambda: add_weapon(pistol_options))
+pistol_add = tk.Button(weapon_select, text="+", bg=btn_color, fg=text_color, activebackground=btn_color, activeforeground=active_btn_fg, command=lambda: add_weapon(pistol_options))
 pistol_label.grid(row=3, column=0)
 pistol_options.grid(row=3, column=1)
 pistol_options.config(state='readonly')
 pistol_add.grid(row=3, column=2)
 
-util_label = tk.Label(weapon_select, text="Utilities")
+util_label = tk.Label(weapon_select, text="Utilities", bg=bg_color, fg=text_color)
 util_options = ttk.Combobox(weapon_select, values=["", "Flashbang",  "Decoy", "He grenade", "Incgrenade", "Molotov", "Smoke", "Zeus", "Vest", "Vest and helmet"])
-util_add = tk.Button(weapon_select, text="+", command=lambda: add_weapon(util_options))
+util_add = tk.Button(weapon_select, text="+", bg=btn_color, fg=text_color, activebackground=btn_color, activeforeground=active_btn_fg, command=lambda: add_weapon(util_options))
 util_label.grid(row=4, column=0)
 util_options.grid(row=4, column=1)
 util_options.config(state='readonly')
 util_add.grid(row=4, column=2)
 
-weapon_options = tk.Frame(frame, height=30, width=400)
+weapon_options = tk.Frame(frame, height=30, width=400, bg=bg_color)
 
 def add_all():
     add_weapon(util_options)
@@ -162,14 +166,14 @@ def add_all():
     add_weapon(smg_options)
     add_weapon(ar_options)
 
-add_btn = tk.Button(weapon_options, text="Add All", width=23, command=add_all)
+add_btn = tk.Button(weapon_options, text="Add All", bg=btn_color, fg=text_color, activebackground=btn_color, activeforeground=active_btn_fg, width=23, command=add_all)
 add_btn.place(x=62, y=0)
 
-weapon_display = tk.Frame(weapons_frame, width=200, height=200)
-weapon_list = tkst.ScrolledText(weapon_display, bg="pink", width=15, height=8)
+weapon_display = tk.Frame(weapons_frame, width=200, height=200, bg=bg_color)
+weapon_list = tkst.ScrolledText(weapon_display, bg=hl_color, width=15, height=8, fg=text_color)
 weapon_list.grid(row=0, column=1)
 
-clear = tk.Button(weapon_options, text="Clear", width=16, command=clear_weapons)
+clear = tk.Button(weapon_options, text="Clear", bg=btn_color, fg=text_color, activebackground=btn_color, activeforeground="red", width=16, command=clear_weapons)
 clear.place(x=233, y=0)
 
 frame1.grid(row=0, column=0)

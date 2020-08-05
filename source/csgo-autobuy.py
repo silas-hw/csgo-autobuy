@@ -28,7 +28,7 @@ frame2 = tk.Frame(frame, width=40, bg=BG_COLOR)
 
 def entry_key():
     hotkey_display.config(state='normal')
-    key = keyboard.read_hotkey(suppress=False)
+    key = keyboard.read_key(suppress=False)
     keybind.key = key
     hotkey_display.delete(0, 'end')
     hotkey_display.insert(0, key)

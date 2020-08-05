@@ -6,8 +6,14 @@ import keyboard
 import pyperclip
 from CLI import Bind
 
+#theming
+
+bg_color = "#303030" #background color
+hl_color = "#525252" #highlight color
+
 window = tk.Tk()
 window.wm_geometry("400x220")
+window.title("csgo-autobuy")
 frame = tk.Frame(window, width=450, height=450)
 
 frame1 = tk.Frame(frame, width=40)

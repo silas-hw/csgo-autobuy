@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import PhotoImage
 import tkinter.scrolledtext as tkst
 import tkinter.ttk as ttk
 from tkinter.constants import ANCHOR, CENTER
@@ -23,6 +24,13 @@ window.title("csgo-autobuy")
 window.config(bg=BG_COLOR)
 frame = tk.Frame(window, width=450, height=450, bg=BG_COLOR)
 
+#images
+img_copy = PhotoImage(file=r"D:\silas\python\csgo autobuy\source\img\copy.png")
+img_copy = img_copy.subsample(26, 26)
+
+img_record = PhotoImage(file=r"D:\silas\python\csgo autobuy\source\img\record.jpg")
+img_record = img_record.subsample(26, 26)
+
 frame1 = tk.Frame(frame, width=40, bg=BG_COLOR)
 frame2 = tk.Frame(frame, width=40, bg=BG_COLOR)
 
@@ -34,7 +42,7 @@ def entry_key():
     hotkey_display.insert(0, key)
     hotkey_display.config(state='readonly')
 
-hotkey_record = tk.Button(frame2, text="record", width=8, bg=BTN_COLOR, fg=TEXT_COLOR, activebackground=BTN_COLOR, activeforeground="white", border=BTN_BORDER, relief=BTN_RELIEF,  command=entry_key)
+hotkey_record = tk.Button(frame2, image=img_record, width=20, bg=BTN_COLOR, fg=TEXT_COLOR, activebackground=BTN_COLOR, activeforeground="white", border=BTN_BORDER, relief=BTN_RELIEF,  command=entry_key)
 hotkey_record.grid(row=1, column=0)
 
 hotkey_display = tk.Entry(frame2, width=40, readonlybackground=HL_COLOR)
@@ -59,7 +67,7 @@ kb_btn = tk.Button(frame1, text="Generate", width=8, bg=BTN_COLOR, fg=TEXT_COLOR
 def kb_copy():
     pyperclip.copy(keybind.command)
 
-kb_copy = tk.Button(frame1, text="C", width=3, bg=BTN_COLOR, fg=TEXT_COLOR, activebackground=BTN_COLOR, activeforeground="white", border=BTN_BORDER, relief=BTN_RELIEF, command=kb_copy)
+kb_copy = tk.Button(frame1, image=img_copy, bg=BTN_COLOR, fg=TEXT_COLOR, activebackground=BTN_COLOR, activeforeground="white", border=BTN_BORDER, relief=BTN_RELIEF, command=kb_copy)
 kb_copy.grid(row=0, column=2)
 
 weapons_frame = tk.Frame(frame, width=400, height=200, bg=BG_COLOR)

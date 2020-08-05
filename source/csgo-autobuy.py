@@ -93,7 +93,7 @@ weapons = {
     "USP":"usp_silencer",
     "Desert eagle":"deagle",
     "Dual Barettas":"elite",
-    "Fiveseven":"fiveseven",
+    "Fiveseven":"fn57",
     "Glock":"glock",
     "P2000":"hkp2000",
     "P250":"p250",

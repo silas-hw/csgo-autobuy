@@ -16,12 +16,12 @@ VSVersionInfo(
         u'040904B0',
         [StringStruct(u'CompanyName', u'silas-hw'),
         StringStruct(u'FileDescription', u'Generates a csgo buy bind'),
-        StringStruct(u'FileVersion', u'0.1'),
+        StringStruct(u'FileVersion', u'0.1.2'),
         StringStruct(u'InternalName', u'csgo-autobuy'),
         StringStruct(u'LegalCopyright', u'GPL-3.0'),
         StringStruct(u'OriginalFilename', u'csgo-autobuy.exe'),
         StringStruct(u'ProductName', u'Autobuy'),
-        StringStruct(u'ProductVersion', u'0.1')])
+        StringStruct(u'ProductVersion', u'0.1.2')])
       ]), 
     VarFileInfo([VarStruct(u'Translation', [1033, 1200])])
   ]

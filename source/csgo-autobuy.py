@@ -18,12 +18,13 @@ BTN_BORDER = 0.5
 BTN_RELIEF = "solid"
 
 window = tk.Tk()
-window.wm_geometry("400x220")
+window.wm_geometry("400x320")
 window.title("csgo-autobuy")
 window.config(bg=BG_COLOR)
 frame = tk.Frame(window, width=450, height=450, bg=BG_COLOR)
 
 frame1 = tk.Frame(frame, width=40, bg=BG_COLOR)
+frame2 = tk.Frame(frame, width=40, bg=BG_COLOR)
 
 def entry_key():
     hotkey_display.config(state='normal')
@@ -33,10 +34,10 @@ def entry_key():
     hotkey_display.insert(0, key)
     hotkey_display.config(state='readonly')
 
-hotkey_record = tk.Button(frame1, text="record", width=8, bg=BTN_COLOR, fg=TEXT_COLOR, activebackground=BTN_COLOR, activeforeground="white", border=BTN_BORDER, relief=BTN_RELIEF,  command=entry_key)
+hotkey_record = tk.Button(frame2, text="record", width=8, bg=BTN_COLOR, fg=TEXT_COLOR, activebackground=BTN_COLOR, activeforeground="white", border=BTN_BORDER, relief=BTN_RELIEF,  command=entry_key)
 hotkey_record.grid(row=1, column=0)
 
-hotkey_display = tk.Entry(frame1, width=40, readonlybackground=HL_COLOR)
+hotkey_display = tk.Entry(frame2, width=40, readonlybackground=HL_COLOR)
 hotkey_display.insert(1, "Hotkey")
 hotkey_display.config(state='readonly')
 hotkey_display.grid(row=1, column=1)
@@ -62,6 +63,7 @@ kb_copy = tk.Button(frame1, text="C", width=3, bg=BTN_COLOR, fg=TEXT_COLOR, acti
 kb_copy.grid(row=0, column=2)
 
 weapons_frame = tk.Frame(frame, width=400, height=200, bg=BG_COLOR)
+weapons_label = tk.Label(weapons_frame, text="Select weapons:", bg=BG_COLOR, fg=TEXT_COLOR, font="Arial 12 bold underline").grid(row=0, column=0)
 
 weapons = {
     "M4A4":"m4a1",
@@ -179,10 +181,11 @@ weapon_list.grid(row=0, column=1)
 clear = tk.Button(weapon_options, text="Clear", bg=BTN_COLOR, fg=TEXT_COLOR, activebackground=BTN_COLOR, activeforeground="red", border=BTN_BORDER, relief=BTN_RELIEF, width=16, command=clear_weapons)
 clear.place(x=233, y=0)
 
-frame1.grid(row=0, column=0)
+frame1.grid(row=3, column=0)
+frame2.grid(row=0, column=0)
 weapons_frame.grid(row=1, column=0)
-weapon_select.grid(row=0, column=0)
-weapon_display.grid(row=0, column=1)
+weapon_select.grid(row=1, column=0)
+weapon_display.grid(row=1, column=1)
 weapon_options.grid(row=2, column=0)
-frame.pack()
+frame.place(x=200, y=150, anchor='center')
 window.mainloop()

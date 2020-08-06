@@ -3,9 +3,17 @@ from tkinter import PhotoImage
 import tkinter.scrolledtext as tkst
 import tkinter.ttk as ttk
 from tkinter.constants import ANCHOR, CENTER
+import PIL
+from PIL import Image, ImageTk
+import os
 import keyboard
 import pyperclip
 from CLI import Bind
+
+window = tk.Tk()
+window.wm_geometry("400x320")
+window.title("csgo-autobuy")
+
 
 #theming
 
@@ -18,23 +26,23 @@ ACTIVE_BTN_FG = "#87eb05"
 BTN_BORDER = 0.5
 BTN_RELIEF = "solid"
 
-window = tk.Tk()
-window.wm_geometry("400x320")
-window.title("csgo-autobuy")
-window.config(bg=BG_COLOR)
-frame = tk.Frame(window, width=450, height=450, bg=BG_COLOR)
+ENT_RELIEF = 'flat'
 
 #images
-img_copy = PhotoImage(file=r"D:\silas\python\csgo autobuy\source\img\copy.png")
+img_copy = PhotoImage(file=r"img\copy.png")
 img_copy = img_copy.subsample(26, 26)
 
-img_record = PhotoImage(file=r"D:\silas\python\csgo autobuy\source\img\record.jpg")
+img_record = PhotoImage(file=r"img\record.jpg")
 img_record = img_record.subsample(26, 26)
 
+window.config(bg=BG_COLOR)
+frame = tk.Frame(window, width=450, height=450, bg=BG_COLOR)
 frame1 = tk.Frame(frame, width=40, bg=BG_COLOR)
 frame2 = tk.Frame(frame, width=40, bg=BG_COLOR)
 
 def entry_key():
+    window.title("recording")
+
     hotkey_display.config(state='normal')
     key = keyboard.read_key(suppress=False)
     keybind.key = key
@@ -42,10 +50,12 @@ def entry_key():
     hotkey_display.insert(0, key)
     hotkey_display.config(state='readonly')
 
-hotkey_record = tk.Button(frame2, image=img_record, width=20, bg=BTN_COLOR, fg=TEXT_COLOR, activebackground=BTN_COLOR, activeforeground="white", border=BTN_BORDER, relief=BTN_RELIEF,  command=entry_key)
+    window.title("csgo-autobuy")
+
+hotkey_record = tk.Button(frame2, image=img_record, bg=BTN_COLOR, fg=TEXT_COLOR, activebackground=BTN_COLOR, activeforeground="white", border=BTN_BORDER, relief=BTN_RELIEF, command=entry_key)
 hotkey_record.grid(row=1, column=0)
 
-hotkey_display = tk.Entry(frame2, width=40, readonlybackground=HL_COLOR)
+hotkey_display = tk.Entry(frame2, width=30, font="Arial 12", readonlybackground=HL_COLOR, relief=ENT_RELIEF)
 hotkey_display.insert(1, "Hotkey")
 hotkey_display.config(state='readonly')
 hotkey_display.grid(row=1, column=1)
@@ -58,7 +68,7 @@ def kb_generate():
     kb_display.insert(0, keybind.command)
     kb_display.config(state="readonly")
 
-kb_display = tk.Entry(frame1, width=40, readonlybackground=HL_COLOR)
+kb_display = tk.Entry(frame1, width=30, font="Arial 12", readonlybackground=HL_COLOR, relief=ENT_RELIEF)
 kb_display.grid(row=0, column=1)
 kb_display.insert(1, "Command output")
 kb_display.config(state='readonly')

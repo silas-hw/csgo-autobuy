@@ -1,5 +1,6 @@
 # DOWNLOAD  
 
+[0.2.1](https://github.com/silas-hw/csgo-autobuy/raw/0.2.1/installer.exe)  
 [0.2](https://github.com/silas-hw/csgo-autobuy/raw/0.2/installer.exe)  
 [0.1.1](https://github.com/silas-hw/csgo-autobuy/raw/0.1.1/csgo-autobuy.exe)  
 

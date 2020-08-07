@@ -38,31 +38,33 @@ img_record = img_record.subsample(26, 26)
 window.config(bg=BG_COLOR)
 frame = tk.Frame(window, width=450, height=450, bg=BG_COLOR)
 frame1 = tk.Frame(frame, width=40, bg=BG_COLOR)
-frame2 = tk.Frame(frame, width=40, bg=BG_COLOR)
+frame_bind = tk.Frame(frame, width=40, bg=BG_COLOR)
 
-def entry_key():
+def entry_key(event):
     window.title("recording")
 
-    hotkey_display.config(state='normal')
+    bindkey_display.config(state='normal')
     key = keyboard.read_key(suppress=False)
     keybind.key = key
-    hotkey_display.delete(0, 'end')
-    hotkey_display.insert(0, key)
-    hotkey_display.config(state='readonly')
+    bindkey_display.delete(0, 'end')
+    bindkey_display.insert(0, key)
+    bindkey_display.config(state='readonly')
 
     window.title("csgo-autobuy")
 
-hotkey_record = tk.Button(frame2, image=img_record, bg=BTN_COLOR, fg=TEXT_COLOR, activebackground=BTN_COLOR, activeforeground="white", border=BTN_BORDER, relief=BTN_RELIEF, command=entry_key)
-hotkey_record.grid(row=1, column=0)
+bindkey_record = tk.Button(frame_bind, image=img_record, bg=BTN_COLOR, fg=TEXT_COLOR, activebackground=BTN_COLOR, activeforeground="white", border=BTN_BORDER, relief=BTN_RELIEF, command=entry_key)
+bindkey_record.grid(row=1, column=0)
 
-hotkey_display = tk.Entry(frame2, width=30, font="Arial 12", readonlybackground=HL_COLOR, relief=ENT_RELIEF)
-hotkey_display.insert(1, "Hotkey")
-hotkey_display.config(state='readonly')
-hotkey_display.grid(row=1, column=1)
+window.bind('<KeyRelease-r>', entry_key)
 
-keybind = Bind(hotkey_display.cget('text'))
+bindkey_display = tk.Entry(frame_bind, width=30, font="Arial 12", readonlybackground=HL_COLOR, relief=ENT_RELIEF)
+bindkey_display.insert(1, "bind key")
+bindkey_display.config(state='readonly')
+bindkey_display.grid(row=1, column=1)
 
-def kb_generate():
+keybind = Bind(bindkey_display.cget('text'))
+
+def kb_generate(event):
     kb_display.config(state="normal")
     kb_display.delete(0, 'end')
     kb_display.insert(0, keybind.command)
@@ -74,14 +76,17 @@ kb_display.insert(1, "Command output")
 kb_display.config(state='readonly')
 kb_btn = tk.Button(frame1, text="Generate", width=8, bg=BTN_COLOR, fg=TEXT_COLOR, activebackground=BTN_COLOR, activeforeground="white", border=BTN_BORDER, relief=BTN_RELIEF, highlightbackground="black", command=kb_generate).grid(row=0, column=0)
 
-def kb_copy():
+window.bind('<g>', kb_generate)
+
+def copy(event):
     pyperclip.copy(keybind.command)
 
-kb_copy = tk.Button(frame1, image=img_copy, bg=BTN_COLOR, fg=TEXT_COLOR, activebackground=BTN_COLOR, activeforeground="white", border=BTN_BORDER, relief=BTN_RELIEF, command=kb_copy)
+kb_copy = tk.Button(frame1, image=img_copy, bg=BTN_COLOR, fg=TEXT_COLOR, activebackground=BTN_COLOR, activeforeground="white", border=BTN_BORDER, relief=BTN_RELIEF, command=copy)
 kb_copy.grid(row=0, column=2)
 
-weapons_frame = tk.Frame(frame, width=400, height=200, bg=BG_COLOR)
-weapons_label = tk.Label(weapons_frame, text="Select weapons:", bg=BG_COLOR, fg=TEXT_COLOR, font="Arial 12 bold underline").grid(row=0, column=0)
+window.bind('<c>', copy)
+
+weapons_frame = tk.LabelFrame(frame, text="Select Weapons", width=400, height=200, bg=BG_COLOR, fg=TEXT_COLOR, bd=0, font="Arial 10 bold underline")
 
 weapons = {
     "M4A4":"m4a1",
@@ -200,7 +205,7 @@ clear = tk.Button(weapon_options, text="Clear", bg=BTN_COLOR, fg=TEXT_COLOR, act
 clear.place(x=233, y=0)
 
 frame1.grid(row=3, column=0)
-frame2.grid(row=0, column=0)
+frame_bind.grid(row=0, column=0)
 weapons_frame.grid(row=1, column=0)
 weapon_select.grid(row=1, column=0)
 weapon_display.grid(row=1, column=1)
